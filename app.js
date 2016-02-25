@@ -3,7 +3,7 @@
 */
 
 var
-    port        = process.env.PORT || 1337,
+    port            = process.env.PORT || 1337,
 
     io              = require('socket.io'),
     express         = require('express'),
@@ -19,14 +19,14 @@ var
 server.listen(port)
 console.log('\n Express running and listening on port ' + port );
 
-app.get( '/', function( req, res ){
+app.get( '/' , function(req, res) {
     res.sendfile( '/public/index.html' , { root:__dirname });
 });
 
-app.get( '/*' , function( req, res, next ) {    // DANGER! THIS WILL SERVE ANYTHING FROM ROOT
+app.get( '/*' , function(req, res, next) {    // DANGER! THIS WILL SERVE ANYTHING FROM ROOT
     var file = req.params[0];
     if(verbose) console.log('\t :: Express :: file requested : ' + file);
-    res.sendfile( __dirname + '/public/' + file );
+    res.sendfile( __dirname + '/' + file );
 }); //app.get *
 
 
