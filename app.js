@@ -2,8 +2,7 @@
     Usage : node app.js
 */
 
-var
-    port            = process.env.PORT || 1337,
+var port            = process.env.PORT || 1337,
 
     io              = require('socket.io'),
     express         = require('express'),
@@ -19,14 +18,14 @@ var
 server.listen(port)
 console.log('\n Express running and listening on port ' + port );
 
-app.get( '/' , function(req, res) {
+app.get('/', function(req, res) {
     res.sendfile( '/public/index.html' , { root:__dirname });
 });
 
-app.get( '/*' , function(req, res, next) {    // DANGER! THIS WILL SERVE ANYTHING FROM ROOT
+app.get('/*', function(req, res, next) {    // DANGER! THIS WILL SERVE ANYTHING FROM ROOT
     var file = req.params[0];
-    if(verbose) console.log('\t :: Express :: file requested : ' + file);
-    res.sendfile( __dirname + '/' + file );
+    if (verbose) console.log('\t :: Express :: file requested : ' + file);
+    res.sendfile(__dirname + '/' + file);
 }); //app.get *
 
 
@@ -62,7 +61,7 @@ socket.sockets.on('connection', function (client) {
         console.log('\t socket.io:: client disconnected ' + client.userid + ' ' + client.game_id);
         
         // if client was in a game
-        if(client.game && client.game.id) {
+        if (client.game && client.game.id) {
             //player leaving a game should destroy that game ? DEBUG
             game_server.endGame(client.game.id, client.userid);
         } //client.game_id
